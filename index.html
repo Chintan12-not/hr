@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senior Product Designer — Luminary</title>
+<meta name="description" content="Join Luminary as a Senior Product Designer and shape the future of human-AI interaction. We're building something the world has never seen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     DESIGN TOKENS
+     Palette: Deep space navy (#0D0F1A), Electric indigo (#5B4FE8),
+     Warm chalk (#F0EDE6), Phosphor green (#00E5A0), Slate (#6B7280)
+  ============================================ */
+  :root {
+    --navy: #0D0F1A;
+    --navy-mid: #161929;
+    --navy-light: #1E2235;
+    --indigo: #5B4FE8;
+    --indigo-glow: #7B70FF;
+    --indigo-dim: #2D2866;
+    --chalk: #F0EDE6;
+    --chalk-warm: #E8E4DB;
+    --phosphor: #00E5A0;
+    --phosphor-dim: rgba(0,229,160,0.15);
+    --slate: #6B7280;
+    --slate-light: #9CA3AF;
+    --white: #FFFFFF;
+    --danger: #FF5C5C;
+
+    --font-display: 'Fraunces', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-soft: cubic-bezier(0.45, 0, 0.15, 1);
+    --transition-base: 0.3s var(--ease-out-expo);
+
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 32px;
+    --radius-full: 9999px;
+
+    --max-width: 1200px;
+    --gutter: clamp(20px, 5vw, 80px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--navy);
+    color: var(--chalk);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  /* ─── SCROLLBAR ─────────────────────────────── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--indigo); border-radius: 2px; }
+
+  /* ─── SELECTION ─────────────────────────────── */
+  ::selection { background: var(--indigo); color: var(--white); }
+
+  /* ─── TYPOGRAPHY ────────────────────────────── */
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 300; line-height: 1.1; }
+  h1 { font-size: clamp(3rem, 7vw, 6rem); }
+  h2 { font-size: clamp(2.2rem, 4vw, 3.5rem); }
+  h3 { font-size: clamp(1.4rem, 2vw, 1.8rem); }
+  p { font-size: clamp(1rem, 1.2vw, 1.1rem); color: var(--chalk-warm); }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--phosphor);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  /* ─── LAYOUT ────────────────────────────────── */
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+  section { padding: clamp(80px, 10vw, 140px) 0; }
+
+  /* ─── BUTTONS ───────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.1);
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: inherit;
+  }
+  .btn:hover::after { opacity: 1; }
+
+  .btn-primary {
+    background: var(--indigo);
+    color: var(--white);
+    box-shadow: 0 0 30px rgba(91,79,232,0.4);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 50px rgba(91,79,232,0.6);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--chalk);
+    border: 1px solid rgba(240,237,230,0.2);
+  }
+  .btn-ghost:hover { border-color: var(--chalk); }
+
+  .btn-phosphor {
+    background: var(--phosphor);
+    color: var(--navy);
+    font-weight: 500;
+    box-shadow: 0 0 30px rgba(0,229,160,0.3);
+  }
+  .btn-phosphor:hover {
+    box-shadow: 0 0 50px rgba(0,229,160,0.5);
+    transform: translateY(-2px);
+  }
+
+  /* ─── CARDS ─────────────────────────────────── */
+  .card {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(91,79,232,0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .card:hover { border-color: rgba(91,79,232,0.3); transform: translateY(-4px); }
+  .card:hover::before { opacity: 1; }
+
+  /* ─── DIVIDER ───────────────────────────────── */
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(91,79,232,0.4), transparent);
+  }
+
+  /* ─── NOISE TEXTURE ─────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ============================================
+     NAV
+  ============================================ */
+  #nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 900;
+    padding: 20px var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  #nav.scrolled {
+    background: rgba(13,15,26,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--chalk);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo-mark {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--indigo), var(--phosphor));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; color: white; font-family: var(--font-mono);
+  }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--slate-light); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--chalk); }
+  @media (max-width: 768px) { .nav-links { display: none; } }
+
+  /* ============================================
+     HERO
+  ============================================ */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(91,79,232,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(0,229,160,0.08) 0%, transparent 50%),
+      var(--navy);
+  }
+
+  /* Animated grid */
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(91,79,232,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,79,232,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 70% at 60% 40%, black 20%, transparent 80%);
+    animation: gridPulse 8s ease-in-out infinite;
+  }
+  @keyframes gridPulse {
+    0%,100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-role-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(91,79,232,0.15);
+    border: 1px solid rgba(91,79,232,0.3);
+    border-radius: var(--radius-full);
+    padding: 8px 16px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--indigo-glow);
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s 0.2s var(--ease-out-expo) forwards;
+  }
+  .role-dot {
+    width: 6px; height: 6px;
+    background: var(--phosphor);
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+  }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .hero-headline {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.9s 0.35s var(--ease-out-expo) forwards;
+  }
+  .hero-headline em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--indigo-glow), var(--phosphor));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    max-width: 560px;
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    color: var(--slate-light);
+    margin-top: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.9s 0.5s var(--ease-out-expo) forwards;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    margin-top: 2.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.9s 0.65s var(--ease-out-expo) forwards;
+  }
+
+  .hero-stats {
+    display: flex; gap: 48px; flex-wrap: wrap;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.8s var(--ease-out-expo) forwards;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--chalk);
+  }
+  .hero-stat-label { font-size: 0.82rem; color: var(--slate); font-family: var(--font-mono); }
+
+  /* Floating orb */
+  .hero-orb {
+    position: absolute;
+    right: -5%;
+    top: 15%;
+    width: min(600px, 55vw);
+    height: min(600px, 55vw);
+    pointer-events: none;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.4s forwards;
+  }
+  .orb-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(91,79,232,0.15);
+    animation: spin 20s linear infinite;
+  }
+  .orb-ring:nth-child(2) {
+    inset: 10%;
+    border-color: rgba(0,229,160,0.1);
+    animation-duration: 30s;
+    animation-direction: reverse;
+  }
+  .orb-ring:nth-child(3) {
+    inset: 22%;
+    border-color: rgba(91,79,232,0.2);
+    animation-duration: 15s;
+  }
+  .orb-core {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 38%;
+    height: 38%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(91,79,232,0.4) 0%, rgba(0,229,160,0.15) 50%, transparent 70%);
+    filter: blur(30px);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .orb-dots {
+    position: absolute; inset: 0;
+  }
+  .orb-dot {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: var(--indigo-glow);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--indigo-glow);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100% { opacity: 0.7; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.1); } }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { to { opacity: 1; } }
+  @media (max-width: 900px) { .hero-orb { display: none; } }
+
+  /* ============================================
+     MARQUEE STRIP
+  ============================================ */
+  .marquee-strip {
+    overflow: hidden;
+    padding: 20px 0;
+    background: rgba(91,79,232,0.08);
+    border-top: 1px solid rgba(91,79,232,0.15);
+    border-bottom: 1px solid rgba(91,79,232,0.15);
+  }
+  .marquee-track {
+    display: flex; gap: 48px;
+    animation: marquee 25s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--slate-light);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .marquee-dot { width: 4px; height: 4px; background: var(--indigo-glow); border-radius: 50%; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* ============================================
+     VALUE PROPOSITION — "WHY THIS MATTERS"
+  ============================================ */
+  .vp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 4rem;
+  }
+  @media (max-width: 640px) { .vp-grid { grid-template-columns: 1fr; } }
+
+  .vp-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    transition: var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+  .vp-card:hover { border-color: rgba(91,79,232,0.3); transform: translateY(-3px); }
+  .vp-card.featured {
+    background: linear-gradient(135deg, var(--indigo-dim) 0%, var(--navy-light) 100%);
+    border-color: rgba(91,79,232,0.35);
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  @media (max-width: 640px) { .vp-card.featured { grid-template-columns: 1fr; } }
+
+  .vp-icon {
+    width: 48px; height: 48px;
+    background: var(--phosphor-dim);
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+  }
+  .vp-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 300; margin-bottom: 10px; }
+  .vp-body { font-size: 0.92rem; color: var(--slate-light); line-height: 1.7; }
+
+  /* ============================================
+     THE ROLE — STORY DRIVEN
+  ============================================ */
+  .role-story { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  @media (max-width: 900px) { .role-story { grid-template-columns: 1fr; gap: 48px; } }
+
+  .role-timeline { position: relative; padding-left: 32px; }
+  .role-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--indigo), var(--phosphor), transparent);
+  }
+
+  .timeline-item {
+    margin-bottom: 40px;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s var(--ease-out-expo);
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -36px; top: 6px;
+    width: 10px; height: 10px;
+    background: var(--indigo);
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+    box-shadow: 0 0 10px rgba(91,79,232,0.6);
+  }
+
+  .timeline-time {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--phosphor);
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+  }
+  .timeline-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin-bottom: 8px; }
+  .timeline-body { font-size: 0.9rem; color: var(--slate-light); }
+
+  /* ─── SKILLS CLOUD ────────────────────────── */
+  .skills-visual {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    position: sticky;
+    top: 100px;
+  }
+  .skills-title { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 24px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .skill-tag {
+    padding: 8px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    transition: var(--transition-base);
+    cursor: default;
+  }
+  .skill-tag.core {
+    background: rgba(91,79,232,0.2);
+    border: 1px solid rgba(91,79,232,0.4);
+    color: var(--indigo-glow);
+  }
+  .skill-tag.bonus {
+    background: rgba(0,229,160,0.1);
+    border: 1px solid rgba(0,229,160,0.25);
+    color: var(--phosphor);
+  }
+  .skill-tag.nice {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--slate-light);
+  }
+  .skill-tag:hover { transform: scale(1.05); }
+
+  /* ─── IMPACT METER ────────────────────────── */
+  .impact-bars { margin-top: 28px; }
+  .impact-label { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px; }
+  .impact-label span:first-child { color: var(--chalk-warm); }
+  .impact-label span:last-child { font-family: var(--font-mono); color: var(--phosphor); }
+  .impact-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .impact-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--indigo), var(--phosphor));
+    width: 0;
+    transition: width 1.2s var(--ease-out-expo);
+  }
+
+  /* ============================================
+     WHY JOIN US
+  ============================================ */
+  #why .inner { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  @media (max-width: 900px) { #why .inner { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { #why .inner { grid-template-columns: 1fr; } }
+
+  .why-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: var(--transition-base);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .why-card.visible { opacity: 1; transform: translateY(0); }
+  .why-card:hover { border-color: rgba(91,79,232,0.3); transform: translateY(-4px); }
+  .why-num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--indigo-glow);
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+  .why-title { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 12px; }
+  .why-body { font-size: 0.9rem; color: var(--slate-light); }
+
+  /* ============================================
+     TEAM
+  ============================================ */
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 3rem; }
+  @media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
+
+  .team-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    text-align: center;
+    transition: var(--transition-base);
+    cursor: pointer;
+  }
+  .team-card:hover { border-color: rgba(91,79,232,0.35); transform: translateY(-4px); }
+  .team-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    position: relative;
+  }
+  .team-avatar::after {
+    content: '';
+    position: absolute; inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--indigo), var(--phosphor));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .team-card:hover .team-avatar::after { opacity: 1; }
+  .team-name { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 4px; }
+  .team-role { font-size: 0.8rem; color: var(--slate); font-family: var(--font-mono); }
+  .team-quote { font-size: 0.85rem; color: var(--slate-light); margin-top: 12px; font-style: italic; }
+
+  /* ============================================
+     BENEFITS
+  ============================================ */
+  .benefits-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 3rem; }
+  @media (max-width: 900px) { .benefits-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 560px) { .benefits-grid { grid-template-columns: 1fr; } }
+
+  .benefit-item {
+    display: flex; gap: 16px;
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    transition: var(--transition-base);
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .benefit-item.visible { opacity: 1; transform: translateY(0); }
+  .benefit-item:hover { border-color: rgba(0,229,160,0.2); }
+  .benefit-emoji { font-size: 1.6rem; flex-shrink: 0; }
+  .benefit-label { font-size: 0.95rem; font-weight: 500; color: var(--chalk); margin-bottom: 4px; }
+  .benefit-desc { font-size: 0.82rem; color: var(--slate); }
+
+  /* ============================================
+     PROCESS — HORIZONTAL TIMELINE
+  ============================================ */
+  .process-track {
+    display: flex;
+    gap: 0;
+    margin-top: 4rem;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .process-track::-webkit-scrollbar { display: none; }
+
+  .process-step {
+    flex: 1;
+    min-width: 180px;
+    position: relative;
+    padding: 0 16px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out-expo);
+  }
+  .process-step.visible { opacity: 1; }
+  .process-step::before {
+    content: '';
+    position: absolute;
+    top: 24px; left: 50%; right: -50%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--indigo-dim), transparent);
+  }
+  .process-step:last-child::before { display: none; }
+
+  .process-num {
+    width: 48px; height: 48px;
+    background: var(--navy-light);
+    border: 1px solid rgba(91,79,232,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--indigo-glow);
+    margin: 0 auto 16px;
+    position: relative;
+    z-index: 1;
+    transition: var(--transition-base);
+  }
+  .process-step:hover .process-num {
+    background: var(--indigo);
+    border-color: var(--indigo);
+    color: white;
+    box-shadow: 0 0 20px rgba(91,79,232,0.5);
+  }
+  .process-label { font-family: var(--font-display); font-size: 1rem; margin-bottom: 8px; }
+  .process-desc { font-size: 0.8rem; color: var(--slate); }
+  .process-time { font-family: var(--font-mono); font-size: 0.7rem; color: var(--phosphor); margin-top: 6px; }
+
+  /* ============================================
+     FAQ
+  ============================================ */
+  .faq-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .faq-item.open { border-color: rgba(91,79,232,0.3); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 28px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 1rem;
+    gap: 16px;
+  }
+  .faq-q:hover { color: var(--indigo-glow); }
+  .faq-arrow {
+    width: 24px; height: 24px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    flex-shrink: 0;
+    transition: transform 0.3s, background 0.3s;
+  }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); background: var(--indigo); border-color: var(--indigo); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s var(--ease-out-expo), padding 0.3s;
+    padding: 0 28px;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 28px 22px; }
+  .faq-a p { color: var(--slate-light); font-size: 0.92rem; }
+
+  /* ============================================
+     FIT QUIZ — PERSONALITY VISUALIZER
+  ============================================ */
+  #quiz {
+    background: var(--navy-mid);
+    border-radius: var(--radius-xl);
+    padding: clamp(40px, 6vw, 80px);
+    position: relative;
+    overflow: hidden;
+  }
+  #quiz::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(91,79,232,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .quiz-header { text-align: center; margin-bottom: 3rem; }
+  .quiz-question { display: none; }
+  .quiz-question.active { display: block; animation: fadeUp 0.4s var(--ease-out-expo); }
+  .quiz-q-text { font-family: var(--font-display); font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin-bottom: 2rem; text-align: center; }
+  .quiz-progress { display: flex; gap: 8px; justify-content: center; margin-bottom: 2rem; }
+  .quiz-pip {
+    height: 3px; flex: 1; max-width: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+  .quiz-pip.done { background: var(--indigo); }
+  .quiz-pip.active { background: var(--phosphor); }
+
+  .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .quiz-options { grid-template-columns: 1fr; } }
+
+  .quiz-opt {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    font-size: 0.95rem;
+    color: var(--chalk-warm);
+    cursor: pointer;
+    transition: var(--transition-base);
+    text-align: left;
+  }
+  .quiz-opt:hover { border-color: var(--indigo); background: rgba(91,79,232,0.1); transform: translateY(-2px); }
+  .quiz-opt.selected { border-color: var(--phosphor); background: rgba(0,229,160,0.1); color: var(--chalk); }
+
+  .quiz-result {
+    display: none;
+    text-align: center;
+    animation: fadeUp 0.6s var(--ease-out-expo);
+  }
+  .quiz-result.active { display: block; }
+  .score-ring {
+    width: 140px; height: 140px;
+    margin: 0 auto 24px;
+    position: relative;
+  }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring circle { fill: none; stroke-width: 8; stroke-linecap: round; }
+  .score-ring .bg { stroke: rgba(255,255,255,0.06); }
+  .score-ring .fg { stroke: var(--phosphor); stroke-dasharray: 340; stroke-dashoffset: 340; transition: stroke-dashoffset 1.5s var(--ease-out-expo); }
+  .score-num {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--chalk);
+  }
+  .score-label { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 12px; }
+  .score-msg { color: var(--slate-light); font-size: 0.95rem; max-width: 400px; margin: 0 auto 2rem; }
+
+  /* ============================================
+     CHATBOT
+  ============================================ */
+  #chat-bubble {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, var(--indigo), var(--phosphor));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 800;
+    box-shadow: 0 4px 24px rgba(91,79,232,0.5);
+    transition: var(--transition-base);
+    border: none;
+  }
+  #chat-bubble:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(91,79,232,0.6); }
+  #chat-bubble svg { width: 26px; height: 26px; fill: white; }
+  .chat-badge {
+    position: absolute; top: -2px; right: -2px;
+    width: 16px; height: 16px;
+    background: var(--phosphor);
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+    animation: blink 2s infinite;
+  }
+
+  #chat-panel {
+    position: fixed;
+    bottom: 104px; right: 28px;
+    width: min(380px, calc(100vw - 40px));
+    max-height: 560px;
+    background: var(--navy-mid);
+    border: 1px solid rgba(91,79,232,0.3);
+    border-radius: var(--radius-xl);
+    display: flex; flex-direction: column;
+    z-index: 800;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s var(--ease-out-expo);
+    overflow: hidden;
+  }
+  #chat-panel.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
+
+  .chat-header {
+    padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(91,79,232,0.2), rgba(0,229,160,0.1));
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .chat-avatar {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--indigo), var(--phosphor));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .chat-header-info strong { font-size: 0.95rem; display: block; }
+  .chat-header-info span { font-size: 0.75rem; color: var(--phosphor); font-family: var(--font-mono); }
+  .chat-close {
+    margin-left: auto;
+    background: none; border: none;
+    color: var(--slate); cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+  }
+  .chat-close:hover { color: var(--chalk); background: rgba(255,255,255,0.08); }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex; flex-direction: column; gap: 12px;
+    scroll-behavior: smooth;
+    min-height: 0;
+  }
+  .chat-messages::-webkit-scrollbar { width: 3px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: rgba(91,79,232,0.3); }
+
+  .msg {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    animation: fadeUp 0.3s var(--ease-out-expo);
+  }
+  .msg.bot {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px 16px 16px 4px;
+    align-self: flex-start;
+    color: var(--chalk-warm);
+  }
+  .msg.user {
+    background: var(--indigo);
+    color: white;
+    border-radius: 16px 16px 4px 16px;
+    align-self: flex-end;
+  }
+  .msg.typing {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px 16px 16px 4px;
+    align-self: flex-start;
+    color: var(--slate-light);
+    font-style: italic;
+    font-size: 0.82rem;
+  }
+
+  .chat-options { display: flex; flex-direction: column; gap: 6px; padding: 0 20px 12px; }
+  .chat-opt {
+    background: var(--navy-light);
+    border: 1px solid rgba(91,79,232,0.25);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: var(--chalk-warm);
+    cursor: pointer;
+    transition: var(--transition-base);
+    text-align: left;
+  }
+  .chat-opt:hover { background: rgba(91,79,232,0.15); border-color: var(--indigo); color: var(--chalk); }
+
+  .chat-input-row {
+    padding: 14px 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; gap: 8px;
+  }
+  .chat-input {
+    flex: 1;
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-full);
+    padding: 10px 16px;
+    color: var(--chalk);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .chat-input:focus { border-color: rgba(91,79,232,0.5); }
+  .chat-input::placeholder { color: var(--slate); }
+  .chat-send {
+    width: 38px; height: 38px;
+    background: var(--indigo);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition-base);
+    flex-shrink: 0;
+  }
+  .chat-send:hover { background: var(--indigo-glow); transform: scale(1.05); }
+
+  /* ============================================
+     APPLICATION FORM
+  ============================================ */
+  #apply {
+    background: var(--navy-mid);
+  }
+
+  .form-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .form-progress {
+    display: flex; gap: 8px; margin-bottom: 3rem;
+  }
+  .form-step-dot {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    transition: background 0.4s;
+  }
+  .form-step-dot.active { background: var(--indigo); }
+  .form-step-dot.done { background: var(--phosphor); }
+
+  .form-step { display: none; animation: fadeUp 0.4s var(--ease-out-expo); }
+  .form-step.active { display: block; }
+
+  .step-title { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 8px; }
+  .step-sub { color: var(--slate-light); font-size: 0.9rem; margin-bottom: 2rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } }
+
+  .form-group { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    color: var(--slate-light);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+  input[type="text"], input[type="email"], input[type="url"], input[type="tel"],
+  select, textarea {
+    width: 100%;
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-md);
+    padding: 13px 16px;
+    color: var(--chalk);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: rgba(91,79,232,0.6);
+    box-shadow: 0 0 0 3px rgba(91,79,232,0.12);
+  }
+  input.error, select.error, textarea.error { border-color: var(--danger); }
+  textarea { min-height: 120px; resize: vertical; }
+  select { cursor: pointer; }
+  select option { background: var(--navy-mid); }
+
+  .file-upload {
+    border: 2px dashed rgba(91,79,232,0.3);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-base);
+    position: relative;
+  }
+  .file-upload:hover { border-color: var(--indigo); background: rgba(91,79,232,0.05); }
+  .file-upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .file-upload-icon { font-size: 2rem; margin-bottom: 8px; }
+  .file-upload-text { font-size: 0.9rem; color: var(--slate-light); }
+  .file-upload-text strong { color: var(--indigo-glow); }
+  .file-name { margin-top: 8px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--phosphor); }
+
+  .range-group { margin-bottom: 16px; }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    background: var(--indigo);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 0 8px rgba(91,79,232,0.5);
+  }
+  input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+  .range-val { font-family: var(--font-mono); font-size: 0.85rem; color: var(--phosphor); margin-top: 4px; }
+
+  .skill-check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 500px) { .skill-check-grid { grid-template-columns: 1fr; } }
+  .skill-check {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: var(--transition-base);
+    font-size: 0.88rem;
+  }
+  .skill-check:hover { border-color: rgba(91,79,232,0.3); }
+  .skill-check input[type="checkbox"] { width: auto; }
+  .skill-check.checked { border-color: rgba(0,229,160,0.35); background: rgba(0,229,160,0.07); }
+
+  .review-box {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .review-section { margin-bottom: 20px; }
+  .review-heading { font-family: var(--font-mono); font-size: 0.72rem; color: var(--phosphor); letter-spacing: 0.15em; margin-bottom: 10px; }
+  .review-line { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.88rem; }
+  .review-line:last-child { border: none; }
+  .review-line span:first-child { color: var(--slate-light); }
+  .review-line span:last-child { color: var(--chalk); text-align: right; }
+
+  .error-msg { font-size: 0.78rem; color: var(--danger); margin-top: 4px; display: none; }
+
+  .form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+
+  /* ─── SUCCESS SCREEN ────────────────────────── */
+  #success-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    animation: fadeUp 0.6s var(--ease-out-expo);
+  }
+  .success-icon {
+    width: 80px; height: 80px;
+    background: rgba(0,229,160,0.1);
+    border: 1px solid rgba(0,229,160,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 24px;
+    animation: successPop 0.5s var(--ease-out-expo);
+  }
+  @keyframes successPop { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .success-title { font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 16px; }
+  .success-body { color: var(--slate-light); max-width: 420px; margin: 0 auto 28px; }
+  .success-timeline { display: flex; flex-direction: column; gap: 12px; max-width: 340px; margin: 0 auto 32px; text-align: left; }
+  .success-step { display: flex; gap: 12px; align-items: flex-start; font-size: 0.88rem; color: var(--slate-light); }
+  .success-step-num {
+    width: 22px; height: 22px; flex-shrink: 0;
+    background: rgba(91,79,232,0.2);
+    border: 1px solid rgba(91,79,232,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--indigo-glow);
+  }
+
+  /* ============================================
+     FINAL CTA
+  ============================================ */
+  #cta {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(91,79,232,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-headline { max-width: 600px; margin: 0 auto 1.5rem; position: relative; }
+  .cta-sub { color: var(--slate-light); max-width: 480px; margin: 0 auto 2.5rem; position: relative; }
+  .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; }
+
+  /* ============================================
+     FOOTER
+  ============================================ */
+  footer {
+    padding: 40px var(--gutter);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-copy { font-size: 0.8rem; color: var(--slate); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 0.8rem; color: var(--slate); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--chalk); }
+
+  /* ============================================
+     TOAST
+  ============================================ */
+  #toast {
+    position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(10px);
+    background: var(--navy-light);
+    border: 1px solid rgba(0,229,160,0.3);
+    border-radius: var(--radius-full);
+    padding: 12px 20px;
+    font-size: 0.88rem;
+    color: var(--chalk);
+    z-index: 900;
+    opacity: 0;
+    transition: all 0.3s var(--ease-out-expo);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Reveal animation utility */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* Section heading */
+  .section-heading { max-width: 640px; margin-bottom: 3rem; }
+  .section-heading h2 { margin-bottom: 16px; }
+  .section-heading p { color: var(--slate-light); }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+============================================ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">L</div>
+    Luminary
+  </a>
+  <ul class="nav-links">
+    <li><a href="#role">The Role</a></li>
+    <li><a href="#why">Why Join</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#quiz">Fit Quiz</a></li>
+  </ul>
+  <a href="#apply" class="btn btn-primary" style="font-size:0.85rem;padding:10px 20px;">Apply Now</a>
+</nav>
+
+<!-- ============================================
+     HERO
+============================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-role-tag">
+        <div class="role-dot"></div>
+        <span>OPEN ROLE · REMOTE · FULL-TIME</span>
+      </div>
+      <h1 class="hero-headline">
+        Design the interface<br>between humans<br>and <em>what's next.</em>
+      </h1>
+      <p class="hero-sub">
+        We're building AI that genuinely understands people. As our first Senior Product Designer, you'll define how millions experience it.
+      </p>
+      <div class="hero-actions">
+        <a href="#apply" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          Apply for this role
+        </a>
+        <a href="#quiz" class="btn btn-ghost">See if you're a fit →</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">$180k–220k</div>
+          <div class="hero-stat-label">TOTAL COMP</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">38</div>
+          <div class="hero-stat-label">TEAM SIZE</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">Series B</div>
+          <div class="hero-stat-label">STAGE</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">4.9★</div>
+          <div class="hero-stat-label">GLASSDOOR</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated orb -->
+  <div class="hero-orb" id="heroOrb">
+    <div class="orb-ring"></div>
+    <div class="orb-ring"></div>
+    <div class="orb-ring"></div>
+    <div class="orb-core"></div>
+    <div class="orb-dots" id="orbDots"></div>
+  </div>
+</section>
+
+<!-- ============================================
+     MARQUEE
+============================================ -->
+<div class="marquee-strip">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- ============================================
+     VALUE PROPOSITION
+============================================ -->
+<section id="value">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">WHY IT MATTERS</span>
+      <h2>This isn't a redesign project. It's first-principles design.</h2>
+      <p>AI interfaces are still in their dark ages — clunky, opaque, and built for engineers, not humans. You'll change that.</p>
+    </div>
+
+    <div class="vp-grid">
+      <div class="vp-card featured reveal">
+        <div>
+          <span class="eyebrow">THE MISSION</span>
+          <h3 style="font-family:var(--font-display);font-size:1.8rem;font-weight:300;margin-bottom:16px;">Make AI feel<br><em style="font-style:italic;">unmistakably human.</em></h3>
+          <p style="color:var(--slate-light);font-size:0.95rem;">Luminary's AI doesn't just answer — it understands context, emotion, and intent. Your design work is what makes that invisible intelligence feel natural, trustworthy, and even delightful.</p>
+        </div>
+        <div style="background:var(--navy);border-radius:var(--radius-md);padding:24px;border:1px solid rgba(255,255,255,0.05);">
+          <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--phosphor);margin-bottom:16px;letter-spacing:0.1em;">YOUR IMPACT AREAS</div>
+          <div class="impact-bars">
+            <div class="impact-label"><span>Design System Architecture</span><span>90%</span></div>
+            <div class="impact-bar"><div class="impact-fill" data-width="90"></div></div>
+            <div class="impact-label"><span>User Research & Insights</span><span>80%</span></div>
+            <div class="impact-bar"><div class="impact-fill" data-width="80"></div></div>
+            <div class="impact-label"><span>Prototyping & Interaction</span><span>95%</span></div>
+            <div class="impact-bar"><div class="impact-fill" data-width="95"></div></div>
+            <div class="impact-label"><span>Cross-Functional Leadership</span><span>70%</span></div>
+            <div class="impact-bar"><div class="impact-fill" data-width="70"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vp-card reveal reveal-delay-1">
+        <div class="vp-icon">🎯</div>
+        <div class="vp-title">You'll own the craft</div>
+        <p class="vp-body">No design-by-committee. No waiting 3 weeks for engineering. You'll move fast with a team that respects design as a core discipline, not a finishing layer.</p>
+      </div>
+
+      <div class="vp-card reveal reveal-delay-2">
+        <div class="vp-icon">🔬</div>
+        <div class="vp-title">Problems nobody's solved</div>
+        <p class="vp-body">How do you visualize confidence scores? How does an AI apologize gracefully? These are genuinely new design questions — and you'll be among the first to answer them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     THE ROLE — A DAY IN THE LIFE
+============================================ -->
+<section id="role">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">A DAY IN YOUR LIFE</span>
+      <h2>What Tuesdays look like here.</h2>
+      <p>Not a manufactured list of bullet points. A real picture of where your energy goes.</p>
+    </div>
+
+    <div class="role-story">
+      <div class="role-timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">9:00 AM</div>
+          <div class="timeline-title">Morning standup + design crit</div>
+          <div class="timeline-body">Quick async review of yesterday's prototypes in Figma. You drop a Loom for the team walking through your new onboarding flow rethink. Three engineers already commented: "Can we ship this Friday?"</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">10:30 AM</div>
+          <div class="timeline-title">User research session</div>
+          <div class="timeline-body">A 60-minute session with 3 power users. You're testing whether the new "explain my reasoning" toggle actually reduces anxiety or just adds noise. You learn something surprising — and immediately want to redesign.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">1:00 PM</div>
+          <div class="timeline-title">Deep work: interaction design</div>
+          <div class="timeline-body">Two hours of focus time. You're designing the "uncertainty visualization" component — how should the UI communicate when the AI isn't sure? You go through 12 iterations. You land on something elegant.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">3:30 PM</div>
+          <div class="timeline-title">Cross-functional design review</div>
+          <div class="timeline-body">PM, lead eng, and the CEO sit down together. You present. The room is quiet for a moment, then: "This is it." You ship the spec by 5pm.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">5:00 PM</div>
+          <div class="timeline-title">Design system contribution</div>
+          <div class="timeline-body">You add three new components to Luminary's design system — fully annotated, with interaction states, accessibility notes, and a usage guide. Future you will thank present you.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="skills-visual reveal">
+          <div class="skills-title">What you bring</div>
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--slate);margin-bottom:16px;letter-spacing:0.08em;">
+            <span style="color:var(--indigo-glow);">■</span> CORE &nbsp;
+            <span style="color:var(--phosphor);">■</span> STRONG PLUS &nbsp;
+            <span style="color:var(--slate-light);">■</span> NICE TO HAVE
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag core">Figma Expert</span>
+            <span class="skill-tag core">Systems Thinking</span>
+            <span class="skill-tag core">User Research</span>
+            <span class="skill-tag core">Interaction Design</span>
+            <span class="skill-tag core">Prototyping</span>
+            <span class="skill-tag core">Design Critique</span>
+            <span class="skill-tag bonus">Framer</span>
+            <span class="skill-tag bonus">Motion Design</span>
+            <span class="skill-tag bonus">AI/ML Familiarity</span>
+            <span class="skill-tag bonus">Data Viz</span>
+            <span class="skill-tag nice">Frontend (HTML/CSS)</span>
+            <span class="skill-tag nice">Accessibility Audit</span>
+            <span class="skill-tag nice">B2B SaaS</span>
+          </div>
+
+          <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.07);">
+            <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--slate);margin-bottom:12px;letter-spacing:0.08em;">WHAT YOU'VE DONE</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+              <li style="display:flex;gap:10px;font-size:0.88rem;color:var(--slate-light);">
+                <span style="color:var(--phosphor);flex-shrink:0;margin-top:2px;">→</span>
+                Shipped 0→1 product experiences used by real people
+              </li>
+              <li style="display:flex;gap:10px;font-size:0.88rem;color:var(--slate-light);">
+                <span style="color:var(--phosphor);flex-shrink:0;margin-top:2px;">→</span>
+                Built and maintained a component library at scale
+              </li>
+              <li style="display:flex;gap:10px;font-size:0.88rem;color:var(--slate-light);">
+                <span style="color:var(--phosphor);flex-shrink:0;margin-top:2px;">→</span>
+                Led design in an ambiguous, fast-moving environment
+              </li>
+              <li style="display:flex;gap:10px;font-size:0.88rem;color:var(--slate-light);">
+                <span style="color:var(--phosphor);flex-shrink:0;margin-top:2px;">→</span>
+                Collaborated with engineers from spec to QA
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     WHY JOIN US
+============================================ -->
+<section id="why" style="background:var(--navy-mid);">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">WHY LUMINARY</span>
+      <h2>Six things that make this different.</h2>
+    </div>
+    <div class="inner">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div class="why-title">Design is a first-class discipline</div>
+        <p class="why-body">Our CEO is a former designer. Design decisions go in the room — not just at the end of the product cycle.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div class="why-title">Genuinely hard problems</div>
+        <p class="why-body">No redesigning dashboards for the 40th time. These are novel UX challenges that will define a new era of software.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div class="why-title">World-class team, tight-knit culture</div>
+        <p class="why-body">38 people who came from Figma, Linear, Vercel, OpenAI. Everyone here is exceptional and also genuinely kind.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <div class="why-title">Transparent compensation</div>
+        <p class="why-body">$180k–$220k base, generous equity, full benefits, $5k learning budget. We publish salary bands — no games.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">05</div>
+        <div class="why-title">Async-first, human-centered culture</div>
+        <p class="why-body">Work when you're in flow. We measure output, not hours. Our calendar has 30% fewer meetings than the industry average.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">06</div>
+        <div class="why-title">Real design influence</div>
+        <p class="why-body">You'll shape the design system from day one. Your work will be seen by hundreds of thousands of people within months.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TEAM
+============================================ -->
+<section id="team">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">YOUR FUTURE TEAM</span>
+      <h2>The people you'll actually work with.</h2>
+      <p>Not stock photos. Real humans with opinions, taste, and excellent Figma shortcuts.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#4F46E5,#7C3AED);">AK</div>
+        <div class="team-name">Aryan Kapoor</div>
+        <div class="team-role">CEO & Co-founder</div>
+        <div class="team-quote">"I think the best products are the ones that make people feel understood."</div>
+      </div>
+      <div class="team-card reveal reveal-delay-1">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#0EA5E9,#6366F1);">ML</div>
+        <div class="team-name">Maya Lindström</div>
+        <div class="team-role">Head of Product</div>
+        <div class="team-quote">"We ship something meaningful every single week. No planning theater."</div>
+      </div>
+      <div class="team-card reveal reveal-delay-2">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#10B981,#3B82F6);">JT</div>
+        <div class="team-name">Jordan Torres</div>
+        <div class="team-role">Lead Engineer</div>
+        <div class="team-quote">"Give me a tight spec and I'll make it sing. I love working with good designers."</div>
+      </div>
+      <div class="team-card reveal reveal-delay-3">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">PS</div>
+        <div class="team-name">Priya Shah</div>
+        <div class="team-role">Research Lead</div>
+        <div class="team-quote">"Every assumption is a hypothesis. We actually test ours."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     BENEFITS
+============================================ -->
+<section id="benefits" style="background:var(--navy-mid);">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">BENEFITS & PERKS</span>
+      <h2>Compensation that doesn't require a decoder ring.</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <div class="benefit-emoji">💰</div>
+        <div>
+          <div class="benefit-label">$180k–220k Base Salary</div>
+          <div class="benefit-desc">Market-leading comp, published and fair.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-emoji">📈</div>
+        <div>
+          <div class="benefit-label">0.2–0.5% Equity</div>
+          <div class="benefit-desc">Meaningful stake in what we build together.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-emoji">🏥</div>
+        <div>
+          <div class="benefit-label">Platinum Health Coverage</div>
+          <div class="benefit-desc">Medical, dental, vision — 100% covered for you and family.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-emoji">📚</div>
+        <div>
+          <div class="benefit-label">$5,000 Learning Budget</div>
+          <div class="benefit-desc">Courses, books, conferences — your call, no approval needed.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-emoji">🌍</div>
+        <div>
+          <div class="benefit-label">Fully Remote</div>
+          <div class="benefit-desc">Work from anywhere. 2 team retreats per year, all expenses paid.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-emoji">🛋️</div>
+        <div>
+          <div class="benefit-label">$2,500 Home Office Setup</div>
+          <div class="benefit-desc">Great work starts with a great environment.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-emoji">🧘</div>
+        <div>
+          <div class="benefit-label">Unlimited PTO (Enforced)</div>
+          <div class="benefit-desc">Minimum 20 days off tracked. We actually want you rested.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-emoji">👶</div>
+        <div>
+          <div class="benefit-label">16 Weeks Parental Leave</div>
+          <div class="benefit-desc">All parents, fully paid, no questions asked.</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-emoji">🔧</div>
+        <div>
+          <div class="benefit-label">Full Tool Stack</div>
+          <div class="benefit-desc">Figma Enterprise, Notion, Linear, Loom — whatever you need.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PROCESS
+============================================ -->
+<section id="process">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">HIRING PROCESS</span>
+      <h2>No surprise steps. No ghosting. Ever.</h2>
+      <p>We respect your time. Here's exactly what happens from application to offer.</p>
+    </div>
+    <div class="process-track">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <div class="process-label">Application</div>
+        <div class="process-desc">Submit your work and answer a few focused questions. No cover letters.</div>
+        <div class="process-time">5 MIN</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <div class="process-label">Portfolio Review</div>
+        <div class="process-desc">We review every submission. You hear back within 72 hours — always.</div>
+        <div class="process-time">72 HRS</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <div class="process-label">Intro Call</div>
+        <div class="process-desc">30 min with our Head of Product. Casual, no tricks. We'll ask, you'll ask.</div>
+        <div class="process-time">30 MIN</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <div class="process-label">Design Challenge</div>
+        <div class="process-desc">A real, scoped problem. Paid ($300). 3-day window. We build it if you join.</div>
+        <div class="process-time">3 DAYS</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">05</div>
+        <div class="process-label">Team Interview</div>
+        <div class="process-desc">Meet 3 people you'd work with daily. Walk us through your thinking.</div>
+        <div class="process-time">2 HRS</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">06</div>
+        <div class="process-label">Offer</div>
+        <div class="process-desc">Decision in 48 hours. Offer letter, not a verbal. Signed, sealed, no games.</div>
+        <div class="process-time">48 HRS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FIT QUIZ
+============================================ -->
+<section id="quiz">
+  <div class="container">
+    <div id="quiz-inner">
+      <div class="quiz-header reveal">
+        <span class="eyebrow">PERSONALITY FIT VISUALIZER</span>
+        <h2 style="margin-bottom:12px;">Are we actually a match?</h2>
+        <p style="color:var(--slate-light);max-width:480px;margin:0 auto;">5 questions. 3 minutes. We'll show you how well this role fits your working style — no email required.</p>
+      </div>
+
+      <div id="quiz-engine" style="max-width:560px;margin:3rem auto 0;">
+        <div class="quiz-progress" id="quizProgress"></div>
+
+        <!-- Q1 -->
+        <div class="quiz-question active" data-q="0">
+          <div class="quiz-q-text">How do you prefer to move from idea to execution?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-score="4" data-dim="craft">I iterate in high fidelity fast — prototypes are my thinking tool</button>
+            <button class="quiz-opt" data-score="3" data-dim="craft">I sketch broadly first, then refine with feedback loops</button>
+            <button class="quiz-opt" data-score="2" data-dim="craft">I need a clear brief before I can commit to a direction</button>
+            <button class="quiz-opt" data-score="1" data-dim="craft">I prefer building with engineers directly in code</button>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-question" data-q="1">
+          <div class="quiz-q-text">When you see an ambiguous design problem…</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-score="4" data-dim="ambiguity">Exciting — I'll define the shape of the problem first</button>
+            <button class="quiz-opt" data-score="3" data-dim="ambiguity">I gather data before committing to a direction</button>
+            <button class="quiz-opt" data-score="2" data-dim="ambiguity">Manageable if I have a senior person to align with</button>
+            <button class="quiz-opt" data-score="1" data-dim="ambiguity">Stressful — I work best with clear requirements</button>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-question" data-q="2">
+          <div class="quiz-q-text">Your relationship with engineers is best described as…</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-score="4" data-dim="collab">I pair with them daily — they're collaborators, not implementers</button>
+            <button class="quiz-opt" data-score="3" data-dim="collab">Close collaboration during sprints, mostly async otherwise</button>
+            <button class="quiz-opt" data-score="2" data-dim="collab">I hand off specs and review the build afterward</button>
+            <button class="quiz-opt" data-score="1" data-dim="collab">Minimal — I let PMs and engineers coordinate</button>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="quiz-question" data-q="3">
+          <div class="quiz-q-text">How often do you do user research on your own?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-score="4" data-dim="research">Every week — I run my own sessions constantly</button>
+            <button class="quiz-opt" data-score="3" data-dim="research">Regularly, usually with a researcher or PM</button>
+            <button class="quiz-opt" data-score="2" data-dim="research">When I have a major decision to validate</button>
+            <button class="quiz-opt" data-score="1" data-dim="research">Rarely — I rely on product research outputs</button>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="quiz-question" data-q="4">
+          <div class="quiz-q-text">What energizes you most in a design role?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-score="4" data-dim="drive">Defining entirely new interaction patterns nobody's made before</button>
+            <button class="quiz-opt" data-score="3" data-dim="drive">Taking complex flows and making them feel obvious</button>
+            <button class="quiz-opt" data-score="2" data-dim="drive">Perfecting every pixel until the visual language sings</button>
+            <button class="quiz-opt" data-score="1" data-dim="drive">Building robust systems that scale across the whole product</button>
+          </div>
+        </div>
+
+        <!-- RESULT -->
+        <div class="quiz-result" id="quizResult">
+          <div class="score-ring">
+            <svg width="140" height="140" viewBox="0 0 140 140">
+              <circle class="bg" cx="70" cy="70" r="54"/>
+              <circle class="fg" id="scoreArc" cx="70" cy="70" r="54"/>
+            </svg>
+            <div class="score-num" id="scoreNum">0%</div>
+          </div>
+          <div class="score-label" id="scoreLabel">Calculating…</div>
+          <p class="score-msg" id="scoreMsg"></p>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a href="#apply" class="btn btn-phosphor" id="quizCTA">Apply Now →</a>
+            <button class="btn btn-ghost" onclick="resetQuiz()">Retake Quiz</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FAQ
+============================================ -->
+<section id="faq">
+  <div class="container" style="max-width:760px;">
+    <div class="section-heading reveal">
+      <span class="eyebrow">COMMON QUESTIONS</span>
+      <h2>The things you're actually wondering.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">
+          Do I need AI industry experience to apply?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a"><p>Not at all. We care far more about your design thinking and ability to operate with ambiguity than your industry background. Curiosity about AI matters more than a résumé full of AI companies.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Is this role truly remote, or will I be expected in an office?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a"><p>Fully remote. We have people in 12 countries. We come together twice a year for team retreats (usually somewhere interesting), but your day-to-day is yours to structure.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          What does the design challenge involve?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a"><p>It's a real, scoped problem from our product roadmap. We give you 3 days, a brief, and access to any context you need. It's paid — $300 — and if you join, there's a good chance we actually build it.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Is there room to grow into a design leadership role?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a"><p>Absolutely. We're building a design team from 1 to 4 in the next 18 months. This hire will likely become our Head of Design once we scale. We're honest about this from day one.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          How quickly does the process move?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a"><p>We aim for 3 weeks start to finish. We know your time is valuable and we've streamlined everything to avoid the 8-round interview cycles you've probably endured elsewhere.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          What if I'm not actively looking but I'm curious?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a"><p>Reach out to our Head of Product, Maya, on LinkedIn. No pressure, no aggressive recruiting. If the timing's not right today, we'd love to stay in touch.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     APPLICATION FORM
+============================================ -->
+<section id="apply">
+  <div class="container">
+    <div class="form-wrapper">
+      <div id="form-container">
+        <div class="section-heading reveal" style="text-align:center;max-width:100%;">
+          <span class="eyebrow">YOUR APPLICATION</span>
+          <h2>Tell us what you've made.</h2>
+          <p>No cover letters. No jargon. Just honest answers and your best work.</p>
+        </div>
+
+        <div class="form-progress" id="formProgress"></div>
+
+        <form id="appForm" novalidate>
+          <!-- STEP 1: Personal Info -->
+          <div class="form-step active" data-step="0">
+            <div class="step-title">The basics.</div>
+            <div class="step-sub">Let's start with who you are.</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">FIRST NAME *</label>
+                <input type="text" id="fname" placeholder="e.g. Alex" required>
+                <div class="error-msg" id="fname-err">This field is required.</div>
+              </div>
+              <div class="form-group">
+                <label for="lname">LAST NAME *</label>
+                <input type="text" id="lname" placeholder="e.g. Rivera" required>
+                <div class="error-msg" id="lname-err">This field is required.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">EMAIL ADDRESS *</label>
+              <input type="email" id="email" placeholder="your@email.com" required>
+              <div class="error-msg" id="email-err">Please enter a valid email address.</div>
+            </div>
+            <div class="form-group">
+              <label for="location">WHERE ARE YOU BASED? *</label>
+              <input type="text" id="location" placeholder="City, Country" required>
+              <div class="error-msg" id="location-err">This field is required.</div>
+            </div>
+            <div class="form-group">
+              <label for="linkedin">LINKEDIN PROFILE</label>
+              <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourname">
+            </div>
+          </div>
+
+          <!-- STEP 2: Work & Portfolio -->
+          <div class="form-step" data-step="1">
+            <div class="step-title">Your work.</div>
+            <div class="step-sub">Show us what you've built. A portfolio link is more valuable than any résumé.</div>
+            <div class="form-group">
+              <label for="portfolio">PORTFOLIO URL *</label>
+              <input type="url" id="portfolio" placeholder="https://yourportfolio.com" required>
+              <div class="error-msg" id="portfolio-err">Please enter a valid portfolio URL.</div>
+            </div>
+            <div class="form-group">
+              <label for="caseStudy">LINK TO YOUR BEST CASE STUDY *</label>
+              <input type="url" id="caseStudy" placeholder="Figma, Notion, or any URL" required>
+              <div class="error-msg" id="caseStudy-err">Please share your best case study link.</div>
+            </div>
+            <div class="form-group">
+              <label>RESUME / CV</label>
+              <div class="file-upload" id="fileUploadArea">
+                <input type="file" id="resumeFile" accept=".pdf,.doc,.docx">
+                <div class="file-upload-icon">📄</div>
+                <div class="file-upload-text">Drop your CV here or <strong>browse files</strong></div>
+                <div class="file-upload-text" style="font-size:0.78rem;margin-top:4px;">PDF, DOC, or DOCX · Max 10MB</div>
+                <div class="file-name" id="fileName"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="yoe">YEARS OF PRODUCT DESIGN EXPERIENCE *</label>
+              <select id="yoe" required>
+                <option value="">Select range</option>
+                <option value="2-3">2–3 years</option>
+                <option value="4-5">4–5 years</option>
+                <option value="6-8">6–8 years</option>
+                <option value="9+">9+ years</option>
+              </select>
+              <div class="error-msg" id="yoe-err">Please select your experience level.</div>
+            </div>
+          </div>
+
+          <!-- STEP 3: Skills & Fit -->
+          <div class="form-step" data-step="2">
+            <div class="step-title">Skills & thinking.</div>
+            <div class="step-sub">Check every tool or skill you're genuinely comfortable with (not just "used it once").</div>
+            <div class="skill-check-grid" id="skillGrid">
+              <label class="skill-check"><input type="checkbox" value="figma"> Figma (advanced)</label>
+              <label class="skill-check"><input type="checkbox" value="prototyping"> High-fidelity prototyping</label>
+              <label class="skill-check"><input type="checkbox" value="design-systems"> Design systems</label>
+              <label class="skill-check"><input type="checkbox" value="user-research"> User research / moderation</label>
+              <label class="skill-check"><input type="checkbox" value="motion"> Motion / After Effects</label>
+              <label class="skill-check"><input type="checkbox" value="data-viz"> Data visualization</label>
+              <label class="skill-check"><input type="checkbox" value="html-css"> HTML/CSS basics</label>
+              <label class="skill-check"><input type="checkbox" value="accessibility"> Accessibility (WCAG)</label>
+            </div>
+
+            <div class="form-group" style="margin-top:24px;">
+              <label for="proudWork">WHAT'S THE DESIGN WORK YOU'RE MOST PROUD OF? *</label>
+              <textarea id="proudWork" placeholder="Describe the problem, your approach, and what made it successful…" required></textarea>
+              <div class="error-msg" id="proudWork-err">Please tell us about your best work.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="aiThink">WHAT DO YOU THINK IS THE BIGGEST UNSOLVED UX PROBLEM IN AI TODAY?</label>
+              <textarea id="aiThink" placeholder="No wrong answers. We're curious how you think." style="min-height:90px;"></textarea>
+            </div>
+          </div>
+
+          <!-- STEP 4: Logistics -->
+          <div class="form-step" data-step="3">
+            <div class="step-title">One last thing.</div>
+            <div class="step-sub">Practical details so we can move quickly if there's a fit.</div>
+
+            <div class="form-group">
+              <label>AVAILABILITY TO START</label>
+              <select id="availability">
+                <option value="">Select timeline</option>
+                <option value="immediate">Immediately (within 2 weeks)</option>
+                <option value="1month">Within 1 month</option>
+                <option value="2months">Within 2 months</option>
+                <option value="3months">Within 3 months</option>
+                <option value="flexible">Flexible — let's discuss</option>
+              </select>
+            </div>
+
+            <div class="range-group">
+              <label>SALARY EXPECTATION (USD)</label>
+              <input type="range" id="salaryRange" min="140" max="240" value="190" step="5">
+              <div class="range-val" id="salaryVal">$190,000 / year</div>
+            </div>
+
+            <div class="form-group">
+              <label for="heardAbout">HOW DID YOU HEAR ABOUT THIS ROLE?</label>
+              <select id="heardAbout">
+                <option value="">Select one</option>
+                <option value="linkedin">LinkedIn</option>
+                <option value="twitter">Twitter / X</option>
+                <option value="referral">Referral from someone at Luminary</option>
+                <option value="designerjobs">Designer Hangout / Job Board</option>
+                <option value="direct">Direct search</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="anything">ANYTHING ELSE YOU WANT US TO KNOW?</label>
+              <textarea id="anything" placeholder="Side projects, constraints, questions for us — anything." style="min-height:80px;"></textarea>
+            </div>
+          </div>
+
+          <!-- STEP 5: Review -->
+          <div class="form-step" data-step="4">
+            <div class="step-title">Review & submit.</div>
+            <div class="step-sub">Make sure everything looks right before you send it.</div>
+            <div class="review-box" id="reviewBox">
+              <div class="review-section">
+                <div class="review-heading">YOU</div>
+                <div class="review-line"><span>Name</span><span id="rv-name">—</span></div>
+                <div class="review-line"><span>Email</span><span id="rv-email">—</span></div>
+                <div class="review-line"><span>Location</span><span id="rv-location">—</span></div>
+              </div>
+              <div class="review-section">
+                <div class="review-heading">WORK</div>
+                <div class="review-line"><span>Portfolio</span><span id="rv-portfolio">—</span></div>
+                <div class="review-line"><span>Experience</span><span id="rv-yoe">—</span></div>
+                <div class="review-line"><span>Resume</span><span id="rv-resume">—</span></div>
+              </div>
+              <div class="review-section">
+                <div class="review-heading">LOGISTICS</div>
+                <div class="review-line"><span>Availability</span><span id="rv-avail">—</span></div>
+                <div class="review-line"><span>Salary target</span><span id="rv-salary">—</span></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;">
+              <input type="checkbox" id="consent" style="width:auto;margin-top:3px;flex-shrink:0;">
+              <label for="consent" style="font-size:0.85rem;color:var(--slate-light);letter-spacing:0;display:inline;">I agree that Luminary can store my data for up to 12 months for recruitment purposes.</label>
+            </div>
+            <div class="error-msg" id="consent-err" style="display:none;">Please confirm you agree to data storage.</div>
+          </div>
+        </form>
+
+        <div class="form-nav" id="formNav">
+          <button class="btn btn-ghost" id="prevBtn" onclick="formPrev()" style="visibility:hidden;">← Back</button>
+          <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--slate);" id="stepLabel">Step 1 of 5</div>
+          <button class="btn btn-primary" id="nextBtn" onclick="formNext()">Continue →</button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="success-screen">
+        <div class="success-icon">🎉</div>
+        <h2 class="success-title">Application received.</h2>
+        <p class="success-body">Thank you for taking the time. Every application is reviewed by a human — you'll hear from us within 72 hours, regardless of the outcome.</p>
+        <div class="success-timeline">
+          <div class="success-step">
+            <div class="success-step-num">1</div>
+            <div>Portfolio review by our design team — <strong>within 48 hours</strong></div>
+          </div>
+          <div class="success-step">
+            <div class="success-step-num">2</div>
+            <div>Intro call invite (if shortlisted) — <strong>within 72 hours</strong></div>
+          </div>
+          <div class="success-step">
+            <div class="success-step-num">3</div>
+            <div>If it's not right now — we'll still let you know, always</div>
+          </div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--slate);margin-bottom:24px;">Check your inbox for a confirmation. Reach out to <strong style="color:var(--indigo-glow);">careers@luminary.ai</strong> if you have questions.</p>
+        <a href="#" class="btn btn-ghost">← Back to top</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FINAL CTA
+============================================ -->
+<section id="cta">
+  <div class="container" style="text-align:center;">
+    <span class="eyebrow">READY?</span>
+    <h2 class="cta-headline reveal">The role's open. The problem's real. The team's waiting.</h2>
+    <p class="cta-sub reveal">If this sounds like the work you've been wanting to do, we'd genuinely love to meet you.</p>
+    <div class="cta-actions reveal">
+      <a href="#apply" class="btn btn-phosphor">Apply in 5 minutes →</a>
+      <a href="#quiz" class="btn btn-ghost">Check your fit first</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+============================================ -->
+<footer>
+  <div class="footer-copy">© 2025 Luminary AI. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Equal Opportunity</a>
+    <a href="mailto:careers@luminary.ai">careers@luminary.ai</a>
+  </div>
+</footer>
+
+<!-- ============================================
+     CHATBOT
+============================================ -->
+<button id="chat-bubble" onclick="toggleChat()" aria-label="Open recruitment chat">
+  <div class="chat-badge"></div>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+
+<div id="chat-panel" role="dialog" aria-label="Recruitment assistant">
+  <div class="chat-header">
+    <div class="chat-avatar">✦</div>
+    <div class="chat-header-info">
+      <strong>Luminary Careers</strong>
+      <span>● Online now</span>
+    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-options" id="chatOptions"></div>
+  <div class="chat-input-row">
+    <input type="text" class="chat-input" id="chatInput" placeholder="Type a message…" onkeydown="chatInputEnter(event)">
+    <button class="chat-send" onclick="sendChatInput()" aria-label="Send">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="22"/><polygon points="22 2 15 22 11 11 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- ============================================
+     JAVASCRIPT
+============================================ -->
+<script>
+// ─── NAV SCROLL ─────────────────────────────
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ─── MARQUEE CONTENT ────────────────────────
+const marqueeItems = [
+  'Design Systems', 'Human-AI Interaction', 'Zero-to-One Product',
+  'Remote-First', 'Figma Expert', 'User Research',
+  'Series B · $42M Raised', 'Interaction Design', 'Async Culture',
+  'Paid Design Challenge', '$180k–220k Comp', 'Equity 0.2–0.5%',
+];
+const track = document.getElementById('marqueeTrack');
+// Duplicate for seamless loop
+[...marqueeItems, ...marqueeItems].forEach(item => {
+  const el = document.createElement('div');
+  el.className = 'marquee-item';
+  el.innerHTML = `<span class="marquee-dot"></span>${item}`;
+  track.appendChild(el);
+});
+
+// ─── ORB DOTS ───────────────────────────────
+const orbDots = document.getElementById('orbDots');
+if (orbDots) {
+  for (let i = 0; i < 8; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'orb-dot';
+    const angle = (i / 8) * 360;
+    const r = 45 + Math.random() * 5;
+    dot.style.left = `calc(50% + ${r}% * ${Math.cos(angle * Math.PI / 180)})`;
+    dot.style.top = `calc(50% + ${r}% * ${Math.sin(angle * Math.PI / 180)})`;
+    dot.style.opacity = 0.4 + Math.random() * 0.6;
+    orbDots.appendChild(dot);
+  }
+}
+
+// ─── INTERSECTION OBSERVER ──────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .why-card, .benefit-item, .timeline-item, .process-step').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// ─── IMPACT BARS ─────────────────────────────
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.impact-fill').forEach(fill => {
+        const w = fill.dataset.width;
+        setTimeout(() => { fill.style.width = w + '%'; }, 200);
+      });
+      barObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.vp-card.featured').forEach(el => barObserver.observe(el));
+
+// ─── FAQ ACCORDION ───────────────────────────
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// ─── QUIZ ────────────────────────────────────
+let quizScores = [];
+let currentQ = 0;
+const totalQ = 5;
+
+function initQuizProgress() {
+  const p = document.getElementById('quizProgress');
+  p.innerHTML = '';
+  for (let i = 0; i < totalQ; i++) {
+    const pip = document.createElement('div');
+    pip.className = 'quiz-pip' + (i === 0 ? ' active' : '');
+    p.appendChild(pip);
+  }
+}
+initQuizProgress();
+
+document.querySelectorAll('.quiz-opt').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const q = this.closest('.quiz-question');
+    q.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+    this.classList.add('selected');
+    const score = parseInt(this.dataset.score);
+    quizScores[currentQ] = score;
+
+    setTimeout(() => {
+      if (currentQ < totalQ - 1) {
+        q.classList.remove('active');
+        currentQ++;
+        document.querySelectorAll('.quiz-question')[currentQ].classList.add('active');
+        updateQuizPips();
+      } else {
+        showQuizResult();
+      }
+    }, 400);
+  });
+});
+
+function updateQuizPips() {
+  const pips = document.querySelectorAll('.quiz-pip');
+  pips.forEach((pip, i) => {
+    pip.classList.remove('active', 'done');
+    if (i < currentQ) pip.classList.add('done');
+    if (i === currentQ) pip.classList.add('active');
+  });
+}
+
+function showQuizResult() {
+  const total = quizScores.reduce((a, b) => (a || 0) + (b || 0), 0);
+  const max = totalQ * 4;
+  const pct = Math.round((total / max) * 100);
+
+  document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+  const result = document.getElementById('quizResult');
+  result.classList.add('active');
+
+  // Animate score ring
+  const circ = 2 * Math.PI * 54;
+  const offset = circ - (pct / 100) * circ;
+  setTimeout(() => {
+    document.getElementById('scoreArc').style.strokeDashoffset = offset;
+    animateNumber(document.getElementById('scoreNum'), 0, pct, 1500, v => v + '%');
+  }, 200);
+
+  // Labels
+  let label, msg;
+  if (pct >= 80) {
+    label = 'Exceptional match.';
+    msg = 'Your working style, curiosity, and experience profile align strongly with what we\'re looking for. We\'d love to talk.';
+    document.getElementById('quizCTA').textContent = 'Apply Now — seriously →';
+  } else if (pct >= 60) {
+    label = 'Strong potential.';
+    msg = 'There\'s a lot here that fits. A few areas to discuss, but that\'s what conversations are for. Consider applying.';
+  } else if (pct >= 40) {
+    label = 'Possible fit.';
+    msg = 'This role might stretch you in new directions — which can be exactly the right thing. Still worth a conversation.';
+    document.getElementById('quizCTA').textContent = 'Apply Anyway →';
+  } else {
+    label = 'Maybe not yet.';
+    msg = 'You might be better placed in a role with more structure right now. Keep watching this space though — we\'re growing.';
+    document.getElementById('quizCTA').style.display = 'none';
+  }
+  document.getElementById('scoreLabel').textContent = label;
+  document.getElementById('scoreMsg').textContent = msg;
+  document.querySelectorAll('.quiz-pip').forEach(p => p.classList.add('done'));
+}
+
+function resetQuiz() {
+  quizScores = [];
+  currentQ = 0;
+  document.querySelectorAll('.quiz-question').forEach(q => q.classList.remove('active'));
+  document.querySelectorAll('.quiz-question')[0].classList.add('active');
+  document.getElementById('quizResult').classList.remove('active');
+  document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+  document.getElementById('scoreArc').style.strokeDashoffset = 340;
+  const cta = document.getElementById('quizCTA');
+  cta.textContent = 'Apply Now →';
+  cta.style.display = '';
+  initQuizProgress();
+}
+
+function animateNumber(el, from, to, duration, format) {
+  const start = performance.now();
+  function step(ts) {
+    const progress = Math.min((ts - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 4);
+    el.textContent = format(Math.round(from + (to - from) * ease));
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ─── SKILL CHECK TOGGLE ─────────────────────
+document.querySelectorAll('.skill-check').forEach(label => {
+  const cb = label.querySelector('input[type="checkbox"]');
+  cb.addEventListener('change', () => label.classList.toggle('checked', cb.checked));
+});
+
+// ─── FILE UPLOAD ─────────────────────────────
+document.getElementById('resumeFile').addEventListener('change', function() {
+  const fn = document.getElementById('fileName');
+  fn.textContent = this.files[0] ? '✓ ' + this.files[0].name : '';
+});
+
+// ─── SALARY RANGE ───────────────────────────
+const salaryRange = document.getElementById('salaryRange');
+const salaryVal = document.getElementById('salaryVal');
+salaryRange.addEventListener('input', function() {
+  salaryVal.textContent = '$' + this.value + ',000 / year';
+});
+
+// ─── MULTI-STEP FORM ────────────────────────
+let formStep = 0;
+const totalSteps = 5;
+
+function initFormProgress() {
+  const p = document.getElementById('formProgress');
+  p.innerHTML = '';
+  for (let i = 0; i < totalSteps; i++) {
+    const d = document.createElement('div');
+    d.className = 'form-step-dot' + (i === 0 ? ' active' : '');
+    p.appendChild(d);
+  }
+}
+initFormProgress();
+
+function updateFormProgress() {
+  const dots = document.querySelectorAll('.form-step-dot');
+  dots.forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i < formStep) d.classList.add('done');
+    if (i === formStep) d.classList.add('active');
+  });
+  document.getElementById('stepLabel').textContent = `Step ${formStep + 1} of ${totalSteps}`;
+  document.getElementById('prevBtn').style.visibility = formStep === 0 ? 'hidden' : 'visible';
+  document.getElementById('nextBtn').textContent = formStep === totalSteps - 1 ? 'Submit Application ✓' : 'Continue →';
+}
+
+function validateStep(step) {
+  let valid = true;
+  const clearErr = (id) => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.remove('error'); }
+    const err = document.getElementById(id + '-err');
+    if (err) err.style.display = 'none';
+  };
+  const showErr = (id) => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.add('error'); }
+    const err = document.getElementById(id + '-err');
+    if (err) err.style.display = 'block';
+    valid = false;
+  };
+
+  if (step === 0) {
+    ['fname','lname','email','location'].forEach(clearErr);
+    const fn = document.getElementById('fname').value.trim();
+    const ln = document.getElementById('lname').value.trim();
+    const em = document.getElementById('email').value.trim();
+    const lo = document.getElementById('location').value.trim();
+    if (!fn) showErr('fname');
+    if (!ln) showErr('lname');
+    if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) showErr('email');
+    if (!lo) showErr('location');
+  } else if (step === 1) {
+    ['portfolio','caseStudy','yoe'].forEach(clearErr);
+    const po = document.getElementById('portfolio').value.trim();
+    const cs = document.getElementById('caseStudy').value.trim();
+    const ye = document.getElementById('yoe').value;
+    if (!po) showErr('portfolio');
+    if (!cs) showErr('caseStudy');
+    if (!ye) showErr('yoe');
+  } else if (step === 2) {
+    clearErr('proudWork');
+    const pw = document.getElementById('proudWork').value.trim();
+    if (!pw) showErr('proudWork');
+  } else if (step === 4) {
+    const consent = document.getElementById('consent').checked;
+    const ce = document.getElementById('consent-err');
+    if (!consent) {
+      ce.style.display = 'block';
+      valid = false;
+    } else {
+      ce.style.display = 'none';
+    }
+  }
+  return valid;
+}
+
+function populateReview() {
+  const fname = document.getElementById('fname').value;
+  const lname = document.getElementById('lname').value;
+  document.getElementById('rv-name').textContent = `${fname} ${lname}`;
+  document.getElementById('rv-email').textContent = document.getElementById('email').value;
+  document.getElementById('rv-location').textContent = document.getElementById('location').value;
+  document.getElementById('rv-portfolio').textContent = document.getElementById('portfolio').value || '—';
+  document.getElementById('rv-yoe').textContent = document.getElementById('yoe').value || '—';
+  const fn = document.getElementById('resumeFile').files[0];
+  document.getElementById('rv-resume').textContent = fn ? fn.name : 'Not provided';
+  const av = document.getElementById('availability');
+  document.getElementById('rv-avail').textContent = av.options[av.selectedIndex]?.text || '—';
+  document.getElementById('rv-salary').textContent = '$' + document.getElementById('salaryRange').value + 'k / year';
+}
+
+function formNext() {
+  if (!validateStep(formStep)) return;
+  if (formStep === totalSteps - 1) {
+    submitForm();
+    return;
+  }
+  document.querySelectorAll('.form-step')[formStep].classList.remove('active');
+  formStep++;
+  document.querySelectorAll('.form-step')[formStep].classList.add('active');
+  if (formStep === totalSteps - 1) populateReview();
+  updateFormProgress();
+  window.scrollTo({ top: document.getElementById('apply').offsetTop - 80, behavior: 'smooth' });
+}
+
+function formPrev() {
+  if (formStep === 0) return;
+  document.querySelectorAll('.form-step')[formStep].classList.remove('active');
+  formStep--;
+  document.querySelectorAll('.form-step')[formStep].classList.add('active');
+  updateFormProgress();
+}
+
+function submitForm() {
+  document.getElementById('form-container').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+  showToast('✓ Application submitted successfully!');
+  window.scrollTo({ top: document.getElementById('apply').offsetTop - 80, behavior: 'smooth' });
+}
+
+// ─── CHATBOT ─────────────────────────────────
+let chatOpen = false;
+let chatStep = 0;
+let chatScore = 0;
+let candidateName = '';
+
+const chatFlow = [
+  {
+    bot: "Hi! 👋 I'm Luminary's recruitment guide. I can tell you about the Senior Product Designer role and help figure out if it's right for you. What's your first name?",
+    type: 'input',
+    handler: (val) => {
+      candidateName = val;
+      return { next: 1 };
+    }
+  },
+  {
+    bot: (name) => `Nice to meet you, ${name}! Quick question — how many years have you been doing product design?`,
+    type: 'options',
+    options: ['Less than 2 years', '2–4 years', '5–7 years', '8+ years'],
+    handler: (val, idx) => {
+      chatScore += [0, 2, 4, 4][idx];
+      return { next: 2 };
+    }
+  },
+  {
+    bot: 'Great. Have you ever built or contributed to a design system from scratch?',
+    type: 'options',
+    options: ['Yes, led the whole thing', 'Yes, as a contributor', 'I\'ve maintained one but not built one', 'Not yet'],
+    handler: (val, idx) => {
+      chatScore += [4, 3, 2, 0][idx];
+      return { next: 3 };
+    }
+  },
+  {
+    bot: 'How comfortable are you working without detailed requirements? This role involves a lot of "here\'s the problem, now define the solution."',
+    type: 'options',
+    options: ['Very comfortable — that\'s where I do my best work', 'Comfortable, I prefer some guidance but can self-direct', 'I need structure to work well', 'I prefer working from detailed specs'],
+    handler: (val, idx) => {
+      chatScore += [4, 3, 1, 0][idx];
+      return { next: 4 };
+    }
+  },
+  {
+    bot: 'Last one — do you have experience with AI products, even using them closely as a user?',
+    type: 'options',
+    options: ['Yes, I\'ve designed AI-native products', 'I use AI tools constantly and understand the UX challenges', 'Some exposure but not deep', 'Minimal'],
+    handler: (val, idx) => {
+      chatScore += [4, 3, 2, 1][idx];
+      return { next: 'result' };
+    }
+  }
+];
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-panel').classList.toggle('open', chatOpen);
+  document.querySelector('.chat-badge').style.display = 'none';
+  if (chatOpen && document.getElementById('chatMessages').children.length === 0) {
+    setTimeout(() => addBotMessage(chatFlow[0].bot, 0, chatFlow[0]), 400);
+  }
+}
+
+function addBotMessage(text, stepIdx, stepData) {
+  const msgs = document.getElementById('chatMessages');
+  const typing = document.createElement('div');
+  typing.className = 'msg typing';
+  typing.textContent = '…';
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  setTimeout(() => {
+    msgs.removeChild(typing);
+    const msg = document.createElement('div');
+    msg.className = 'msg bot';
+    msg.textContent = typeof text === 'function' ? text(candidateName) : text;
+    msgs.appendChild(msg);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    if (stepData?.type === 'options') {
+      const opts = document.getElementById('chatOptions');
+      opts.innerHTML = '';
+      stepData.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'chat-opt';
+        btn.textContent = opt;
+        btn.onclick = () => {
+          addUserMessage(opt);
+          opts.innerHTML = '';
+          const result = stepData.handler(opt, i);
+          chatStep++;
+          if (result.next === 'result') {
+            showChatResult();
+          } else {
+            const next = chatFlow[result.next];
+            setTimeout(() => addBotMessage(typeof next.bot === 'function' ? next.bot(candidateName) : next.bot, result.next, next), 600);
+          }
+        };
+        opts.appendChild(btn);
+      });
+    } else if (stepData?.type === 'input') {
+      document.getElementById('chatInput').style.display = 'block';
+      document.getElementById('chatInput').focus();
+    }
+  }, 800);
+}
+
+function addUserMessage(text) {
+  const msgs = document.getElementById('chatMessages');
+  const msg = document.createElement('div');
+  msg.className = 'msg user';
+  msg.textContent = text;
+  msgs.appendChild(msg);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function sendChatInput() {
+  const input = document.getElementById('chatInput');
+  const val = input.value.trim();
+  if (!val) return;
+  addUserMessage(val);
+  input.value = '';
+  input.style.display = 'none';
+
+  if (chatStep === 0) {
+    const result = chatFlow[0].handler(val);
+    chatStep++;
+    const next = chatFlow[result.next];
+    setTimeout(() => addBotMessage(typeof next.bot === 'function' ? next.bot(candidateName) : next.bot, result.next, next), 600);
+  }
+}
+
+function chatInputEnter(e) {
+  if (e.key === 'Enter') sendChatInput();
+}
+
+function showChatResult() {
+  const maxScore = 16;
+  const pct = Math.round((chatScore / maxScore) * 100);
+  let msg, cta;
+  if (pct >= 75) {
+    msg = `${candidateName}, based on your answers you look like a strong fit — ${pct}% match. I'd encourage you to apply today.`;
+    cta = true;
+  } else if (pct >= 50) {
+    msg = `${candidateName}, you're at a ${pct}% match. There's real potential here. Worth applying and having a conversation.`;
+    cta = true;
+  } else {
+    msg = `${candidateName}, this role might be a stretch right now (${pct}% match). That said, if you believe in the mission, apply anyway — fit isn't everything.`;
+    cta = true;
+  }
+
+  const msgs = document.getElementById('chatMessages');
+  const typing = document.createElement('div');
+  typing.className = 'msg typing';
+  typing.textContent = '…';
+  msgs.appendChild(typing);
+  setTimeout(() => {
+    msgs.removeChild(typing);
+    const resultMsg = document.createElement('div');
+    resultMsg.className = 'msg bot';
+    resultMsg.innerHTML = msg;
+    msgs.appendChild(resultMsg);
+
+    if (cta) {
+      setTimeout(() => {
+        const ctaMsg = document.createElement('div');
+        ctaMsg.className = 'msg bot';
+        ctaMsg.innerHTML = `<a href="#apply" onclick="toggleChat()" style="color:var(--phosphor);font-weight:500;">→ Apply for this role</a> — takes about 5 minutes.`;
+        msgs.appendChild(ctaMsg);
+        msgs.scrollTop = msgs.scrollHeight;
+      }, 600);
+    }
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 1000);
+}
+
+// ─── TOAST ──────────────────────────────────
+function showToast(message) {
+  const t = document.getElementById('toast');
+  t.textContent = message;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── EASTER EGG: KONAMI CODE ─────────────────
+let konamiSeq = [];
+const konami = [38,38,40,40,37,39,37,39,66,65];
+document.addEventListener('keydown', (e) => {
+  konamiSeq.push(e.keyCode);
+  konamiSeq = konamiSeq.slice(-10);
+  if (konamiSeq.join(',') === konami.join(',')) {
+    showToast('🎮 Easter egg found! Add "konami=true" to your cover letter for bonus points. Shh.');
+    document.body.style.animation = 'none';
+    document.querySelectorAll('.hero-orb .orb-ring').forEach(r => r.style.borderColor = 'rgba(255,0,128,0.4)');
+  }
+});
+
+// ─── SECTION LINK SMOOTH SCROLL ─────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+    }
+  });
+});
+
+// ─── STAGGER WHY CARDS ───────────────────────
+const whyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const cards = e.target.querySelectorAll('.why-card');
+      cards.forEach((c, i) => setTimeout(() => c.classList.add('visible'), i * 100));
+      whyObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+const whySection = document.querySelector('#why .inner');
+if (whySection) whyObserver.observe(whySection);
+
+// ─── STAGGER BENEFIT ITEMS ───────────────────
+const benefitObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const items = e.target.querySelectorAll('.benefit-item');
+      items.forEach((c, i) => setTimeout(() => c.classList.add('visible'), i * 80));
+      benefitObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05 });
+const benefitsGrid = document.querySelector('.benefits-grid');
+if (benefitsGrid) benefitObserver.observe(benefitsGrid);
+
+// ─── PROCESS STEPS REVEAL ───────────────────
+const procObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const steps = document.querySelectorAll('.process-step');
+      steps.forEach((s, i) => setTimeout(() => s.classList.add('visible'), i * 120));
+      procObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+const procTrack = document.querySelector('.process-track');
+if (procTrack) procObserver.observe(procTrack);
+</script>
+</body>
+</html>
